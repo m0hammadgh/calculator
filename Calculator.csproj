@@ -56,8 +56,10 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Helper\Calc.cs" />
+    <Compile Include="Helper\CheckCalculator.cs" />
     <Compile Include="Helper\FindOperatorType.cs" />
     <Compile Include="Helper\TextHelper.cs" />
+    <Compile Include="Model\CalcModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form\Form1.resx">

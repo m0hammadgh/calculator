@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using Calculator.Enums;
 using Calculator.Extensions;
+using Calculator.Model;
 
 namespace Calculator.Helper
 {
     public class TextHelper
     {
 
-        public static string ClearLastNumber(String text) => text.Remove(text.Length - 1); //Extension method to clear the last char of a text
+        public static string ClearLastNumber(String text) => text.Remove(text.Length - 1); //lol  :P Extension method to clear the last char of a text
 
 
-        public static string ChangeOperator(string text, Operators operand)   // Replace the desired operand in the given text
+        public static string ChangeOperator(string text, Operators operand)   //:P :D  Replace the desired operand in the given text
         {
             switch (FindOperatorType.GetOperatorNameBySign(text))
             {
@@ -58,6 +59,14 @@ namespace Calculator.Helper
                     return text.Split();
             }
 
+        }
+
+        public static CalcModel SetCalcValues(double number1,Operators operand)
+        {
+            return new CalcModel {
+                Num1=number1,
+                Oprator=operand
+            };
         }
     }
 }
