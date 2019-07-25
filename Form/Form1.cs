@@ -145,11 +145,7 @@ namespace Calculator
             edtOperation.Enabled = true;
             isOn = true;
         }
-        private void SetText(String number)
-        {
-
-            edtOperation.Text = edtOperation.Text + number;
-        }
+        
 
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
