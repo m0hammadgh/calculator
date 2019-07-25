@@ -1,4 +1,5 @@
 ﻿using Calculator.Enums;
+using Calculator.Extensions;
 using Calculator.Helper;
 using Calculator.Model;
 using System;
@@ -16,7 +17,9 @@ namespace Calculator
     public partial class Form1 : Form
     {
         private bool isOn = false;
+        private bool isFirst = false;
         private CalcModel calculateObject = new CalcModel();
+        private string lastOperand="";
         public Form1()
         {
             InitializeComponent();
@@ -45,38 +48,63 @@ namespace Calculator
 
         private void btnDivide_Click(object sender, EventArgs e)
         {
-            if (isOn)
+            if (isOn && edtOperation.Text != "")
             {
-                calculateObject = TextHelper.SetCalcValues(double.Parse(edtOperation.Text), Operators.Divide);
-                edtOperation.Text = "";
+                lastOperand = "/";
+                if (calculateObject.Oprator==Operators.None)
+                {
+                    calculateObject.Oprator = Operators.Divide;
+                }
+                btnResult.PerformClick();
+                calculateObject.Oprator = Operators.Divide;
+                
             }
         }
 
         private void btnMultiple_Click(object sender, EventArgs e)
         {
-            if (isOn)
+            lastOperand = "*";
+            if (isOn && edtOperation.Text != "")
             {
-                calculateObject = TextHelper.SetCalcValues(double.Parse(edtOperation.Text), Operators.Multiple);
-                edtOperation.Text = "";
+                if (calculateObject.Oprator == Operators.None)
+                {
+                    calculateObject.Oprator = Operators.Multiple;
+                }
+                btnResult.PerformClick();
+                calculateObject.Oprator = Operators.Multiple;
+                
             }
 
         }
 
         private void btnMinus_Click(object sender, EventArgs e)
         {
-            if (isOn)
+            lastOperand = "-";
+            if (isOn && edtOperation.Text != "")
             {
-                calculateObject = TextHelper.SetCalcValues(double.Parse(edtOperation.Text), Operators.Minus);
-                edtOperation.Text = "";
+                if (calculateObject.Oprator == Operators.None)
+                {
+                    calculateObject.Oprator = Operators.Minus;
+                }
+                btnResult.PerformClick();
+                calculateObject.Oprator = Operators.Minus;
+               
             }
         }
 
         private void btnPlus_Click(object sender, EventArgs e)
         {
-            if (isOn)
+            lastOperand = "+";
+            if (isOn && edtOperation.Text != "")
             {
-                calculateObject = TextHelper.SetCalcValues(double.Parse(edtOperation.Text), Operators.Plus);
-                edtOperation.Text = "";
+                if (calculateObject.Oprator == Operators.None)
+                {
+                    calculateObject.Oprator = Operators.Plus;
+                }
+                btnResult.PerformClick();
+                calculateObject.Oprator = Operators.Plus;
+               
+
             }
         }
 
@@ -87,12 +115,15 @@ namespace Calculator
             {
                 if (calculateObject.Oprator == Operators.None)
                 {
-                    MessageBox.Show("عملگر را انمتخاب کنید");
+                    MessageBox.Show("عملگر را انتخاب کنید");
                 }
                 else
                 {
+
                     calculateObject.Num2 = double.Parse(edtOperation.Text);
-                    tvResult.Text = Calc.Calculate(calculateObject).ToString();
+                    edtOperation.Text = "";
+                    tvCurrentOperation.Text += calculateObject.Num2 + lastOperand;
+                    tvResult.Text = Calc.Calculate(calculateObject).Result.ToString();
 
                 }
             }
@@ -114,58 +145,6 @@ namespace Calculator
             edtOperation.Enabled = true;
             isOn = true;
         }
-
-        private void btn1_Click(object sender, EventArgs e)
-        {
-            SetText("1");
-        }
-
-        private void btn2_Click(object sender, EventArgs e)
-        {
-            SetText("2");
-        }
-
-        private void btn3_Click(object sender, EventArgs e)
-        {
-            SetText("3");
-        }
-
-        private void btn4_Click(object sender, EventArgs e)
-        {
-            SetText("4");
-        }
-
-        private void btn5_Click(object sender, EventArgs e)
-        {
-            SetText("5");
-        }
-
-        private void btn6_Click(object sender, EventArgs e)
-        {
-            SetText("6");
-        }
-
-        private void btn7_Click(object sender, EventArgs e)
-        {
-            SetText("7");
-        }
-
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            SetText("8");
-        }
-
-        private void btn9_Click(object sender, EventArgs e)
-        {
-            SetText("9");
-        }
-
-        private void btn0_Click(object sender, EventArgs e)
-        {
-            SetText("0");
-        }
-
         private void SetText(String number)
         {
 
@@ -196,14 +175,17 @@ namespace Calculator
                 btnDivide.PerformClick();
                 return true;
             }
-            else if(keyData == (Keys.Multiply))
+            else if (keyData == (Keys.Multiply))
             {
                 btnMultiple.PerformClick();
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
+        
     }
+
+
 
 
 }

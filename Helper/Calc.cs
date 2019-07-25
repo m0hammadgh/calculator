@@ -9,22 +9,30 @@ using System.Threading.Tasks;
 namespace Calculator.Helper
 {
     class Calc
-    {  public static object Calculate(CalcModel calc)
+    {  public static CalcModel Calculate(CalcModel calc)
         {
             switch (calc.Oprator)
             {
                 case Operators.None:
-                    return 0;
+                    return calc;
                 case Operators.Plus:
-                    return (calc.Num1 + calc.Num2);
+                    calc.Result += calc.Num2;
+                    calc.Num1 = calc.Num2;
+                    return calc;
                 case Operators.Minus:
-                    return (calc.Num1 - calc.Num2);
+                    calc.Result -= calc.Num2;
+                    calc.Num1 = calc.Num2;
+                    return calc;
                 case Operators.Multiple:
-                    return (calc.Num1 * calc.Num2);
+                    calc.Result *= calc.Num2;
+                    calc.Num1 = calc.Num2;
+                    return calc;
                 case Operators.Divide:
-                    return (double)calc.Num1 / calc.Num2;
+                    calc.Result /= calc.Num2;
+                    calc.Num1 = calc.Num2;
+                    return calc;
                 default:
-                    return 0;
+                    return calc;
             }
         }
     }

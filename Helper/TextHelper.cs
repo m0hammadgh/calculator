@@ -61,8 +61,10 @@ namespace Calculator.Helper
 
         }
 
-        public static CalcModel SetCalcValues(double number1,Operators operand)
+        public static CalcModel SetCalcValues(double number1,Operators operand,Double result)
         {
+
+
             return new CalcModel {
                 Num1=number1,
                 Oprator=operand

@@ -16,5 +16,6 @@ namespace Calculator.Model
         public Double Result { get; set; }
 
         public Operators Oprator { get; set; }
+        public Operators lastOpertaion { get; set; }
     }
 }
